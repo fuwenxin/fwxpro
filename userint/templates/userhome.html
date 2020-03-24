@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ user }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h3>我的数据集</h3>
+        </div>
+        <hr>
+        <div class="row">
+            <ul class="list-group">
+                {% for dataset in datasets %}
+                    <li class="list-group-item">
+                        <span class="badge">{{ dataset.dataNum }}</span>
+                        <a href="{% url 'data_list' dataset.pk %}">{{ dataset.dataName }}</a>(创建时间：{{ dataset.create_time|date:"Y-m-d H:i" }})
+                    </li>
+                {% empty %}
+                    <li class="list-group-item">
+                        还未存有数据
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

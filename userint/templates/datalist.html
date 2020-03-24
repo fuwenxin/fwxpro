@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}{{ user }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h3>{{ listinfo }}</h3>
+        </div>
+        <hr>
+        <div class="row">
+           <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>图像特征描述</th>
+                    <th>文字额外描述</th>
+                    <th>所在位置</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for dataset in datalist %}
+                       <tr>
+                           <th>
+                                {{ dataset.pk }}
+                            </th>
+                            {% if dataset.typeData|length > 2 %}
+                                <th>{{ dataset.typeData }}</th>
+                            {% else %}
+                                <th>-</th>
+                            {% endif %}
+                            {% if dataset.wordData|length > 2 %}
+                                <th>{{ dataset.wordData  }}</th>
+                            {% else %}
+                                <th>-</th>
+                            {% endif %}
+                            {% if dataset.log > 1 and dataset.lat > 1 %}
+                                <th>({{ dataset.log }},{{ dataset.lat }})</th>
+                            {% else %}
+                                <th>(-,-)</th>
+                            {% endif %}
+                       </tr>
+                    {% empty %}
+                        <tr>
+                            <th>-</th>
+                            <th>-</th>
+                            <th>-</th>
+                            <th>-</th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

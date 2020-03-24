@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}个人资料{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>信息</th>
+                    <th>内容</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">账号</th>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">邮箱</th>
+                        <td>{% if user.email %}{{ user.email }}{% else %}未绑定{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">上次登录时间</th>
+                        <td>{{ user.last_login|date:"Y-m-d H:i:s" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
